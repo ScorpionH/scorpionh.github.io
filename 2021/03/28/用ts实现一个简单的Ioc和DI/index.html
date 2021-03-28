@@ -81,13 +81,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Scorpion">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="Ioc和DI控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用ts实现一个简单的Ioc和DI">
+<meta property="og:url" content="http://example.com/2021/03/28/%E7%94%A8ts%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI/index.html">
 <meta property="og:site_name" content="Scorpion">
+<meta property="og:description" content="Ioc和DI控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/03/28/%E7%94%A8ts%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI/error.png">
+<meta property="og:image" content="http://example.com/2021/03/28/%E7%94%A8ts%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI/result.png">
+<meta property="article:published_time" content="2021-03-28T08:53:44.000Z">
+<meta property="article:modified_time" content="2021-03-28T09:02:16.541Z">
 <meta property="article:author" content="scorpionH">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/28/%E7%94%A8ts%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI/error.png">
 
 
 
@@ -117,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2021/03/28/用ts实现一个简单的Ioc和DI/"/>
 
 
 
 
 
-  <title>Scorpion</title>
+  <title>用ts实现一个简单的Ioc和DI | Scorpion</title>
   
 
 
@@ -142,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,9 +222,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -248,9 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/28/%E7%94%A8ts%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI/" itemprop="url">用ts实现一个简单的Ioc和DI</a></h1>
+          <h1 class="post-title" itemprop="name headline">用ts实现一个简单的Ioc和DI</h1>
         
 
         <div class="post-meta">
@@ -300,9 +304,7 @@
       
 
       
-        
-          
-            <h1 id="Ioc和DI"><a href="#Ioc和DI" class="headerlink" title="Ioc和DI"></a>Ioc和DI</h1><h2 id="控制反转（英语：Inversion-of-Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency-Injection，简称DI），还有一种方式叫“依赖查找”（Dependency-Lookup）。（以上来自维基百科）"><a href="#控制反转（英语：Inversion-of-Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency-Injection，简称DI），还有一种方式叫“依赖查找”（Dependency-Lookup）。（以上来自维基百科）" class="headerlink" title="控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）"></a>控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）</h2><h3 id="在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。"><a href="#在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。" class="headerlink" title="在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。"></a>在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。</h3><h2 id="实现一个简单的Ioc和DI。"><a href="#实现一个简单的Ioc和DI。" class="headerlink" title="实现一个简单的Ioc和DI。"></a>实现一个简单的Ioc和DI。</h2><ol>
+        <h1 id="Ioc和DI"><a href="#Ioc和DI" class="headerlink" title="Ioc和DI"></a>Ioc和DI</h1><h2 id="控制反转（英语：Inversion-of-Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency-Injection，简称DI），还有一种方式叫“依赖查找”（Dependency-Lookup）。（以上来自维基百科）"><a href="#控制反转（英语：Inversion-of-Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency-Injection，简称DI），还有一种方式叫“依赖查找”（Dependency-Lookup）。（以上来自维基百科）" class="headerlink" title="控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）"></a>控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）</h2><h3 id="在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。"><a href="#在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。" class="headerlink" title="在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。"></a>在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。</h3><h2 id="实现一个简单的Ioc和DI。"><a href="#实现一个简单的Ioc和DI。" class="headerlink" title="实现一个简单的Ioc和DI。"></a>实现一个简单的Ioc和DI。</h2><ol>
 <li><h3 id="最原始的做法"><a href="#最原始的做法" class="headerlink" title="最原始的做法"></a>最原始的做法</h3></li>
 </ol>
 <ul>
@@ -325,8 +327,6 @@
 <li>CONSTANT.ts<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Types &#x3D; &#123;</span><br><span class="line">  [key: string]: Symbol</span><br><span class="line">&#125;</span><br><span class="line">export const TYPES: Types &#x3D; &#123;</span><br><span class="line">  &#39;indexService&#39;: Symbol.for(&#39;indexService&#39;),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -343,144 +343,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scorpion">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/26/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-26T11:09:10+08:00">
-                2021-03-26
-              </time>
+              <a href="/2021/03/26/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -490,10 +374,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -501,6 +386,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -521,8 +410,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -571,6 +469,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ioc%E5%92%8CDI"><span class="nav-number">1.</span> <span class="nav-text">Ioc和DI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%EF%BC%88%E8%8B%B1%E8%AF%AD%EF%BC%9AInversion-of-Control%EF%BC%8C%E7%BC%A9%E5%86%99%E4%B8%BAIoC%EF%BC%89%EF%BC%8C%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E7%A7%8D%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E5%87%8F%E4%BD%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BB%A3%E7%A0%81%E4%B9%8B%E9%97%B4%E7%9A%84%E8%80%A6%E5%90%88%E5%BA%A6%E3%80%82%E5%85%B6%E4%B8%AD%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%B9%E5%BC%8F%E5%8F%AB%E5%81%9A%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88Dependency-Injection%EF%BC%8C%E7%AE%80%E7%A7%B0DI%EF%BC%89%EF%BC%8C%E8%BF%98%E6%9C%89%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%8F%AB%E2%80%9C%E4%BE%9D%E8%B5%96%E6%9F%A5%E6%89%BE%E2%80%9D%EF%BC%88Dependency-Lookup%EF%BC%89%E3%80%82%EF%BC%88%E4%BB%A5%E4%B8%8A%E6%9D%A5%E8%87%AA%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">控制反转（英语：Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。（以上来自维基百科）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%B9%B3%E6%97%B6%E7%9A%84%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9D%97A%E4%BE%9D%E8%B5%96%E4%BA%8E%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9D%97B%EF%BC%8C%E9%80%9A%E5%B8%B8%E7%9A%84%E5%81%9A%E6%B3%95%E6%98%AF%E5%9C%A8%E6%A8%A1%E5%9D%97A%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E9%80%9A%E8%BF%87new%E4%B8%80%E4%B8%AAB%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%8C%E5%B9%B6%E7%94%A8%E8%BF%99%E4%B8%AA%E5%AE%9E%E4%BE%8B%E6%9D%A5%E8%B0%83%E7%94%A8%E6%A8%A1%E5%9D%97B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8A%9F%E8%83%BD%E3%80%82%E8%80%8CIoc%E5%92%8CDI%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86%E8%BF%99%E4%BA%9B%E8%A2%AB%E4%BE%9D%E8%B5%96%E6%A8%A1%E5%9D%97%EF%BC%8C%E9%80%9A%E8%BF%87%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E6%96%B9%E5%BC%8F%E5%BE%80%E7%9B%AE%E6%A0%87%E4%B8%AD%E6%B3%A8%E5%85%A5%E8%BF%99%E4%BA%9B%E6%A8%A1%E5%9D%97%E3%80%82%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%AE%8C%E5%85%A8%E7%94%B1%E5%AE%B9%E5%99%A8%E6%8E%A7%E5%88%B6%E4%BB%8E%E8%80%8C%E8%BE%BE%E5%88%B0%E8%A7%A3%E8%80%A6%E3%80%82"><span class="nav-number">1.1.1.</span> <span class="nav-text">在平时的开发中，如果一个模块A依赖于另一个模块B，通常的做法是在模块A的构造函数中通过new一个B的实例，并用这个实例来调用模块B的一些功能。而Ioc和DI可以通过一个容器统一管理这些被依赖模块，通过依赖注入的方式往目标中注入这些模块。整个过程完全由容器控制从而达到解耦。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Ioc%E5%92%8CDI%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">实现一个简单的Ioc和DI。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%8E%9F%E5%A7%8B%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">最原始的做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用装饰器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E6%A0%B7%E4%B8%80%E4%B8%AA%E7%AE%80%E7%89%88%E7%9A%84Ioc%E5%92%8CDI%E5%B0%B1%E5%AE%9E%E7%8E%B0%E4%BA%86%EF%BC%8C%E7%9B%B4%E6%8E%A5%E9%80%9A%E8%BF%87ts-node%E8%BF%90%E8%A1%8Ccontroller-ts%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%B0%BD%E7%AE%A1%E6%B2%A1%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%97%B6%E5%80%99%E4%BC%A0%E5%85%A5IndexService%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%8C%E4%BD%86%E8%BF%98%E6%98%AF%E6%88%90%E5%8A%9F%E8%B0%83%E7%94%A8%E4%BA%86%E3%80%82"><span class="nav-number">1.3.</span> <span class="nav-text">这样一个简版的Ioc和DI就实现了，直接通过ts-node运行controller.ts可以看到尽管没在初始化的时候传入IndexService的实例，但还是成功调用了。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">具体文件代码如下：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -705,6 +619,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
